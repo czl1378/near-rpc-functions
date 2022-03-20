@@ -3,6 +3,11 @@ import { Handler } from '@netlify/functions';
 
 const RPC_ENPOINT = `https://rpc.${process.env.NETWORK_ID||'testnet'}.near.org`;
 
+function parse(value: number[]) {
+  return value && value.length > 0 ? 
+  JSON.parse(Buffer.from(value).toString()) : value;
+}
+
 const handler: Handler = async (event, context) => {
   const { token, accounts } = event.queryStringParameters;
 
@@ -21,7 +26,13 @@ const handler: Handler = async (event, context) => {
         'method_name': 'ft_balance_of',
         'args_base64': b.toString('base64')
       }
-    }).then(res => res.data);
+    }).then(res => res.data).then(json => {
+      if (json.error) {
+        throw new Error(json.error);
+      }
+  
+      return json.result?.result ? parse(json.result.result) : null;
+    });
   });
 
   const res = await Promise.all(promises);
