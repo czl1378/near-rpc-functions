@@ -79,11 +79,13 @@ const handler: Handler = async (event, context) => {
       })
     }
   } catch(err) {
+    console.log(err);
     return {
       statusCode: 200,
       body: JSON.stringify({
+        url: WAMP_NEAR_EXPLORER_URL,
         success: false,
-        message: err.message
+        message: err.toString()
       })
     }
   }
