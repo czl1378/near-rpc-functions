@@ -24,16 +24,18 @@ exports.handler = async (event) => {
     LIMIT ${limit}
   `);
 
-  const accountIds = rows.map(row => ([
-    row.receipt_predecessor_account_id, 
-    row.args.args_json.account_id
-  ]));
+  const res = rows.map(({ 
+    receipt_predecessor_account_id, 
+    args, 
+    receipt_included_in_block_timestamp 
+  }) => ({
+    effectedAccountIds: [receipt_predecessor_account_id, args.args_json.account_id],
+    timestamp: receipt_included_in_block_timestamp
+  }));
 
   return {
     statusCode: 200,
-    body: JSON.stringify(
-      [...new Set(accountIds.flat(Infinity))]
-    ),
+    body: JSON.stringify(res),
   };
 
 }
