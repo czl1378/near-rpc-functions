@@ -3,7 +3,7 @@
   to = "/.netlify/functions/:splat"
   status = 200
 
-[context.main]
+[context.production]
   environment = { NETWORK_ID = "mainnet", EXPLORER_PG_URL = "postgres://public_readonly:nearprotocol@mainnet.db.explorer.indexer.near.dev/mainnet_explorer" }
 
 [context.testnet]

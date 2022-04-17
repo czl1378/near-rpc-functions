@@ -11,7 +11,7 @@ const explorerPGPool = new Pool({
   max: 20
 });
 
-const handler = async (event) => {
+exports.handler = async (event) => {
 
   const { token, timestamp = 0, limit = 100 } = event.queryStringParameters;
   
@@ -30,5 +30,3 @@ const handler = async (event) => {
   };
 
 }
-
-export { handler }

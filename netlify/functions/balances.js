@@ -1,4 +1,4 @@
-import axios from 'axios';
+const { axios } = require('axios');
 
 const RPC_ENPOINT = `https://rpc.${process.env.NETWORK_ID||'testnet'}.near.org`;
 
@@ -7,7 +7,7 @@ function parse(value) {
   JSON.parse(Buffer.from(value).toString()) : value;
 }
 
-const handler = async (event) => {
+exports.handler = async (event) => {
   const { token, accounts } = event.queryStringParameters;
 
   const accountsArr = accounts.split(',');
@@ -39,7 +39,6 @@ const handler = async (event) => {
   return {
     statusCode: 200,
     body: JSON.stringify(res),
-  };
-};
-
-export { handler }
+  }
+  
+}
