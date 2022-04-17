@@ -1,6 +1,4 @@
-import { Handler } from '@netlify/functions';
-
-import { Pool } from 'pg';
+const { Pool } = require('pg');
 
 const matchExplorer = /(.*):(.*)@(.*)\/(.*)/.exec(process.env.EXPLORER_PG_URL);
 
@@ -13,7 +11,7 @@ const explorerPGPool = new Pool({
   max: 20
 });
 
-const handler: Handler = async (event) => {
+const handler = async (event) => {
 
   const { token, timestamp = 0, limit = 100 } = event.queryStringParameters;
   

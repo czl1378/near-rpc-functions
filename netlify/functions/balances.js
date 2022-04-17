@@ -1,14 +1,13 @@
 import axios from 'axios';
-import { Handler } from '@netlify/functions';
 
 const RPC_ENPOINT = `https://rpc.${process.env.NETWORK_ID||'testnet'}.near.org`;
 
-function parse(value: number[]) {
+function parse(value) {
   return value && value.length > 0 ? 
   JSON.parse(Buffer.from(value).toString()) : value;
 }
 
-const handler: Handler = async (event, context) => {
+const handler = async (event) => {
   const { token, accounts } = event.queryStringParameters;
 
   const accountsArr = accounts.split(',');
