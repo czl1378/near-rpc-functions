@@ -24,10 +24,13 @@ exports.handler = async (event) => {
     LIMIT ${limit}
   `);
 
-  const accountIds = rows.map(row => ([
-    row.receipt_predecessor_account_id, 
-    row.args_json.account_id
-  ]));
+  const accountIds = rows.map(row => {
+    console.log(row);
+    return [
+      row.receipt_predecessor_account_id, 
+      row.args_json.account_id
+    ];
+  });
 
   return {
     statusCode: 200,
