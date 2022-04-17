@@ -1,4 +1,4 @@
-const { axios } = require('axios');
+const axios = require('axios');
 
 const RPC_ENPOINT = `https://rpc.${process.env.NETWORK_ID||'testnet'}.near.org`;
 
@@ -40,5 +40,5 @@ exports.handler = async (event) => {
     statusCode: 200,
     body: JSON.stringify(res),
   }
-  
+
 }
