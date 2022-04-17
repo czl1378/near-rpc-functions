@@ -13,7 +13,7 @@ const explorerPGPool = new Pool({
 
 exports.handler = async (event) => {
 
-  const { token, timestamp = 0, limit = 100 } = event.queryStringParameters;
+  const { token, timestamp = 0, limit = 50 } = event.queryStringParameters;
   
   const { rows } = await explorerPGPool.query(`
     SELECT * FROM action_receipt_actions 
