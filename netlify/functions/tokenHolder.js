@@ -15,7 +15,7 @@ exports.handler = async (event) => {
 
   const { token, timestamp = 0, limit = 100 } = event.queryStringParameters;
   
-  const res = await explorerPGPool.query(`
+  const { rows } = await explorerPGPool.query(`
     SELECT * FROM action_receipt_actions 
     WHERE receipt_receiver_account_id='${token}'
     AND receipt_included_in_block_timestamp>${timestamp}
@@ -24,9 +24,16 @@ exports.handler = async (event) => {
     LIMIT ${limit}
   `);
 
+  const accountIds = rows.map(row => ([
+    row.receipt_predecessor_account_id, 
+    row.args_json.account_id
+  ]));
+
   return {
     statusCode: 200,
-    body: JSON.stringify(res),
+    body: JSON.stringify(
+      [...new Set(accountIds.flat(Infinity))]
+    ),
   };
 
 }
