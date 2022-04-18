@@ -2,6 +2,8 @@ const { Pool } = require('pg');
 
 const matchAnalytics = /(.*):(.*)@(.*)\/(.*)/.exec(process.env.ANALYTICS_PG_URL);
 
+console.log(process.env.ANALYTICS_PG_URL, matchAnalytics);
+
 const pgPool = new Pool({
   host: matchAnalytics[3],
   user: matchAnalytics[1],
