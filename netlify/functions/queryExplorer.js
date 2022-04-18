@@ -13,7 +13,7 @@ const pgPool = new Pool({
 
 exports.handler = async (event) => {
 
-  const { query } = JSON.stringify(event.body);
+  const { query } = JSON.parse(event.body);
 
   console.log('hehe', event.body, query);
   
