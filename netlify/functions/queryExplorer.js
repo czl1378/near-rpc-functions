@@ -14,6 +14,8 @@ const pgPool = new Pool({
 exports.handler = async (event) => {
 
   const { query } = JSON.stringify(event.body);
+
+  console.log('hehe', event.body, query);
   
   const res = await pgPool.query(query);
 
