@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 
-const match = /(.*):(.*)@(.*)\/(.*)/.exec(process.env.EXPLORER_PG_URL);
+const match = /(.*):(.*)@(.*)\/(.*)/.exec(process.env.TELEMETRY_PG_URL);
 
 const pgPool = new Pool({
   host: match[3],
