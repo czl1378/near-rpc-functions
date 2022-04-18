@@ -44,7 +44,7 @@ exports.handler = async (event) => {
     statusCode: 200,
     body: JSON.stringify({
       dailyTx,
-      recentTxCount
+      recentTxCount: recentTxCount[0].count
     }),
   };
 
