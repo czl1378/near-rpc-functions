@@ -2,8 +2,6 @@ const { Pool } = require('pg');
 
 const matchAnalytics = /(.*):(.*)@(.*)\/(.*)/.exec(process.env.ANALYTICS_PG_URL);
 
-console.log(process.env.ANALYTICS_PG_URL, matchAnalytics);
-
 const pgPool = new Pool({
   host: matchAnalytics[3],
   user: matchAnalytics[1],
@@ -14,6 +12,9 @@ const pgPool = new Pool({
 });
 
 exports.handler = async (event) => {
+
+
+  console.log('hehe', process.env.ANALYTICS_PG_URL, matchAnalytics);
 
   const { rows } = await pgPool.query(`
     SELECT collected_for_day AS date,
