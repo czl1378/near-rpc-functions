@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 
 const matchExplorer = /(.*):(.*)@(.*)\/(.*)/.exec(process.env.EXPLORER_PG_URL);
 
-const explorerPGPool = new Pool({
+const pgPool = new Pool({
   host: matchExplorer[3],
   user: matchExplorer[1],
   password: matchExplorer[2],
@@ -15,7 +15,7 @@ exports.handler = async (event) => {
 
   const { token, timestamp = 0, limit = 100 } = event.queryStringParameters;
   
-  const { rows } = await explorerPGPool.query(`
+  const { rows } = await pgPool.query(`
     SELECT * FROM action_receipt_actions 
     WHERE receipt_receiver_account_id='${token}'
     AND receipt_included_in_block_timestamp>${timestamp}
