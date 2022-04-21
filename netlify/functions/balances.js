@@ -8,11 +8,9 @@ function parse(value) {
 }
 
 exports.handler = async (event) => {
-  const { token, accounts } = event.queryStringParameters;
+  const { token, accounts } = JSON.parse(event.body);
 
-  const accountsArr = accounts.split(',');
-
-  const promises = accountsArr.map(account => {
+  const promises = accounts.map(account => {
     const b = Buffer.from(`{"account_id": "${account}"}`);
     return axios.post(RPC_ENPOINT, {
       'jsonrpc': '2.0',
