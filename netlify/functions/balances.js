@@ -10,6 +10,13 @@ function parse(value) {
 exports.handler = async (event) => {
   const { token, accounts } = JSON.parse(event.body);
 
+  if (!token || !accounts || !accounts.length) {
+    return {
+      statusCode: 200,
+      body: JSON.stringify([]),
+    }
+  }
+
   const promises = accounts.map(account => {
     const b = Buffer.from(`{"account_id": "${account}"}`);
     return axios.post(RPC_ENPOINT, {
