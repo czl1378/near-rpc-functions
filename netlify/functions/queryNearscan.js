@@ -18,7 +18,7 @@ exports.handler = async (event) => {
 
   if (requestSecret !== secret) {
     return {
-      statuCode: 403,
+      statusCode: 403,
       body: 'Forbidden'
     }
   }
