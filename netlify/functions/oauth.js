@@ -6,7 +6,7 @@ exports.handler = async (event) => {
   const oauth2Client = new OAuth2Client({
     clientId: process.env.OAUTH_CLIENT_ID,
     clientSecret: process.env.OAUTH_CLIENT_SECRET,
-    redirectUri: `https://${process.env.NETWORK_ID}.oct.network/appchains/${appchain}`
+    redirectUri: `https://${process.env.NETWORK_ID}.oct.network/callback`
   });
 
   const url = oauth2Client.generateAuthUrl({
@@ -15,7 +15,8 @@ exports.handler = async (event) => {
       'https://www.googleapis.com/auth/cloud-platform.read-only',
       'https://www.googleapis.com/auth/userinfo.email',
       'openid'
-    ]
+    ],
+    state: `appchain=${appchain}`
   });
   
   return {
