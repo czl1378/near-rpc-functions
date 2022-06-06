@@ -15,6 +15,7 @@ function generateAuthUrl(network, appchain) {
       'https://www.googleapis.com/auth/userinfo.email',
       'openid'
     ],
+    include_granted_scopes: true,
     state: `appchain=${appchain}`
   });
 }
