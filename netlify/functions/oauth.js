@@ -7,7 +7,7 @@ const oauth2Client = new OAuth2Client({
 
 function generateAuthUrl(network, appchain) {
   return oauth2Client.generateAuthUrl({
-    redirectUri: `https://${network}.oct.network/redirect`,
+    redirect_uri: `https://${network}.oct.network/redirect`,
     scope: [
       'https://www.googleapis.com/auth/compute.readonly', 
       'https://www.googleapis.com/auth/cloud-platform.read-only',
