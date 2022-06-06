@@ -1,12 +1,12 @@
 const { OAuth2Client } = require('google-auth-library');
 
 exports.handler = async (event) => {
-  const { appchain } = event.queryStringParameters;
+  const { appchain, network } = event.queryStringParameters;
 
   const oauth2Client = new OAuth2Client({
     clientId: process.env.OAUTH_CLIENT_ID,
     clientSecret: process.env.OAUTH_CLIENT_SECRET,
-    redirectUri: `https://${process.env.NETWORK_ID}.oct.network/redirect`
+    redirectUri: `https://${network}.oct.network/redirect`
   });
 
   const url = oauth2Client.generateAuthUrl({
